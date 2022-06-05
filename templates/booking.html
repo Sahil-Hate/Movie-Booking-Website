@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+<title>Movie Ticket Booking </title>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Movie Ticket Booking Widget Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<link href='//fonts.googleapis.com/css?family=Kotta+One' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href="{% static 'css/final-booking.css' %}" rel="stylesheet" type="text/css" media="all" />
+<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+<script src="{% static 'js/jquery.seat-charts.js' %}"></script>
+</head>
+<body>
+<form method="POST">
+{% csrf_token %}
+<div class="content">
+	<h1>Movie Ticket Booking</h1>
+	<div class="main">
+		<h2>Multiplex Theatre Showing Screen 1</h2>
+		<div class="demo">
+			<div id="seat-map">
+				<div class="front">SCREEN</div>					
+			</div>
+			<div class="booking-details">
+				<ul class="book-left">
+					<li>Movie </li>
+					<li>Date </li>
+					<li>Tickets</li>
+					<li>Total</li>
+				</ul>
+				<ul class="book-right">
+					<li>: {{movie}}</li>
+					<li>: {{date}}</li>
+					<li>: <span id="counter">0</span></li>
+					<li>: <b><i>₹</i><span id="total">0</span></b></li>
+				</ul>
+				<div class="clear"></div>
+				<ul style="display: none;" id="selected-seats" class="scrollbar scrollbar1" name="selectedseats"></ul>
+				<input style="display: none;" type="text" id="abc" name="abc">
+				<input type="button" onclick="final()" class="checkout-button" value="Final">
+				<button type="submit" id="submitbtn" class="checkout-button" disabled>Book Now</button>
+				<script>
+					function final(){
+						var X = document.getElementsByName("booked")
+						var Y = document.getElementById("abc")
+						var Z = document.getElementById("submitbtn")
+						var str = ""
+						for(var i=0;i<X.length;i++){
+							str=str+X[i].innerHTML+";"
+						}
+						Y.value=str
+						Z.disabled=false
+					}
+				</script>	
+				<div id="legend"></div>
+			</div>
+			<div style="clear:both"></div>
+	    </div>
+		<script>
+			function xyz(){
+
+			}
+		</script>
+			<script type="text/javascript">
+				var price = 100; //price
+				$(document).ready(function() {
+					var $cart = $('#selected-seats'), //Sitting Area
+					$counter = $('#counter'), //Votes
+					$total = $('#total'); //Total money
+					
+					var sc = $('#seat-map').seatCharts({
+						map: [  //Seating chart
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'__________',
+							'__________',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'__________',
+							'aaaaaaaaaa',
+						],
+						naming : {
+							top : false,
+							getLabel : function (character, row, column) {
+								return column;
+							}
+						},
+						legend : { //Definition legend
+							node : $('#legend'),
+							items : [
+								[ 'a', 'available',   'Available' ],
+								[ 'a', 'unavailable', 'Sold'],
+								[ 'a', 'selected', 'Selected']
+							]					
+						},
+						click: function () { //Click event
+							if (this.status() == 'available') { //optional seat
+								$('<li name="booked">'+(this.settings.row+1)+ '_' +this.settings.label+'</li>')
+									.attr('id', 'cart-item-'+this.settings.id)
+									.data('seatId', this.settings.id)
+									.appendTo($cart);
+
+								$counter.text(sc.find('selected').length+1);
+								$total.text(recalculateTotal(sc)+price);
+											
+								return 'selected';
+							} else if (this.status() == 'selected') { //Checked
+									//Update Number
+									$counter.text(sc.find('selected').length-1);
+									//update totalnum
+									$total.text(recalculateTotal(sc)-price);
+										
+									//Delete reservation
+									$('#cart-item-'+this.settings.id).remove();
+									//optional
+									return 'available';
+							} else if (this.status() == 'unavailable') { //sold
+								return 'unavailable';
+							} else {
+								return this.style();
+							}
+						}
+					});
+					//sold seat
+					var booked_seats = "{{booked_seats}}"
+					booked_seats = booked_seats.replace('[','')
+					booked_seats = booked_seats.replace(']','')
+					booked_seats = booked_seats.split(",")
+					for(var i=0;i<booked_seats.length;i++){
+						booked_seats[i]=booked_seats[i].replace(new RegExp("&"+"#"+"x27;", "g"), "").trim()
+					}
+					sc.get(booked_seats).status('unavailable');
+						
+				});
+				//sum total money
+				function recalculateTotal(sc) {
+					var total = 0;
+					sc.find('selected').each(function () {
+						total += price;
+					});
+							
+					return total;
+				}
+			</script>
+	</div>
+</div>
+<script src="{% static 'js/jquery.nicescroll.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+</form>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmation</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style type="text/css">
+    body{
+        margin: 50px 15px 0;
+        font-family: 'Open Sans', sans-serif;
+    }
+    h1{
+        color: #2FAC66;
+        font-weight: bold;
+        padding-bottom: 15px;
+    }
+    p{
+        color: #666;
+        font-size: 16px;
+    }
+    i{
+        color: #2FAC66;
+        width: 60px;
+        height: 60px;
+        border-radius: 60px;
+        background: #f2f2f2;
+        display: inline-block;
+        line-height: 62px;
+        font-size: 28px;
+    }
+
+    .btn-grad {background-image: linear-gradient(to right, #1D976C 0%, #93F9B9  51%, #1D976C  100%)}
+    .btn-grad {
+       margin: 10px;
+       padding: 15px 45px;
+       text-align: center;
+       text-transform: uppercase;
+       transition: 0.5s;
+       background-size: 200% auto;
+       color: white;            
+       box-shadow: 0 0 20px #eee;
+       border-radius: 10px;
+       display: block;
+     }
+
+     .btn-grad:hover {
+       background-position: right center; /* change the direction of the change here */
+       color: #fff;
+       text-decoration: none;
+     }
+
+     .container {
+        height: 200px;
+        position: relative;
+      }
+      
+      .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    
+</style>
+
+</head> 
+<body>
+<div class="text-center"> 
+    <i class="icon-box"><span class="glyphicon glyphicon-ok">
+    </span></i>
+    <h1>Confirmation</h1>
+    <p>Form submitted successfully!
+        You can now login using your Username & Password.
+    </p>
+    
+    <div class="container">
+        <div class="center">
+            <button onclick="location.href='{%url 'login'%}'" class="btn-grad">Go to Login Page</button>
+        </div>
+    </div>
+    
+</div>
+
+</body></html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Bootstrap CDN -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<!-- Adding CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/detail_page.css' %}">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<!-- Bootstrap Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<title>Movie Details</title>
+	<style>
+		.movie-banner-container {
+			background-image: url("{{movie_id.background_image.url}}");
+			width: 100%;
+			height: 380px;
+			background-size: cover;
+			opacity: 0.8;
+		}
+		.movie-banner-container a {
+			position: absolute;
+			bottom: 40%;
+			left: 50%;
+			font-size: 40px;
+		}
+	</style>
+	<script>
+		function genreChanger(){
+			g = document.getElementById("genre")
+			g1 = g.innerHTML.split(":")
+			g2 = g1[0]
+			for(i=1;i<g1.length;i++)
+			{
+				g2 = g2 + ", " + g1[i]
+			}
+			g.innerHTML = g2
+	}
+	</script>
+</head>
+<body onload="genreChanger()">
+	<!-- Movie Banner & Full Details Of Movie Section -->
+	<section>
+		
+		<div class="movie-banner-container position-relative">		<!-- Movie Banner Container -->
+			<a href="{{movie_id.url}}" target="_blank"><i class="far fa-play-circle"></i></a>
+		</div>
+
+		<div class="container-fluid movie-details-container">		<!-- Full Details Of Movie Container -->
+			<div class="row">
+
+				<!-- Poster Container -->
+				<div class="col-4 col-lg-2">
+					<div>		<!-- Container -->
+						<div>
+							<img src="{{movie_id.image.url}}" alt="{{movie_id.name}}" width="100%" height="auto">
+						</div>
+						<div>
+							<span class="badge badge-pill badge-dark">2D</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Movie Details Middle Container -->
+				<div class="col-8 col-lg-7">
+					<!-- Main Container -->
+					<div>
+						<div class="mb-2 text-light">
+							<h3>{{movie_id.name}}</h3>
+						</div>
+
+						<div class="mb-1 text-light">
+							<span><i class="fas fa-film"></i> {{movie_id.language}}</span>
+						</div>
+
+						<div class="mb-2">
+							<span id="genre" class="badge badge-pill badge-secondary font-weight-light mr-1">{{movie_id.genre}}</span>
+						</div>
+
+						<div class="mb-3 small text-light">
+							<span class="mr-3"><i class="far fa-calendar-alt"></i> {{movie_id.release_date}}</span>
+							<span><i class="far fa-clock"></i> {{movie_id.duration}}</span>
+						</div>
+
+						<!-- Rating Container -->
+						<div class="row mb-5">
+							<div class="col-6 col-lg-3">
+								<div>
+									<div class="lead">
+										<span><i class="fas fa-heart text-danger"></i></span>
+										<span class="font-weight-normal">{{movie_id.rating}}%</span>
+									</div>
+								</div>
+							</div>
+
+						<!-- Summary, User & Critic Reviews Tab Container -->
+						<div>
+							<!-- Tab Container -->
+							<div>
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#summary-tab">Summary</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#u-reviews-tab">User Reviews</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#r-reviews-tab">Critic Reviews</a>
+									</li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+
+									<!-- Summary Tab Container -->
+									<div id="summary-tab" class="container-fluid tab-pane active">
+
+										<div class="mt-5">		<!-- Synopsis Container -->
+											<p class="font-weight-bold text-uppercase">synopsis</p>
+											<p style="font-size:medium;" class="small text-secondary">{{movie_id.synopsis}}</p>
+										</div>
+
+										<div class="mt-5">		<!-- Cast Container -->
+											<p class="font-weight-bold text-uppercase">cast</p>
+											<!-- Movie Cast Carousel Container -->
+											<div class="mt-5">
+												<div id="cast-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+
+													<!-- The Slideshow -->
+													<div class="container carousel-inner">
+														<div class="carousel-item active">		<!-- First Slide -->
+															<!-- First Flex Slide Box -->
+															<div class="d-flex justify-content-around">
+																{%for i in cast%}
+																<div>
+																	<img class="rounded-circle" src="{{i.image.url}}" alt="{{i.name}}">
+																	<p class="small text-center text-info m-1">{{i.name}}</p>
+																</div>
+																{%endfor%}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="u-reviews-tab" class="tab-pane fade"><br>
+										<h3>Menu 1</h3>
+										<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+									</div>
+
+									<div id="r-reviews-tab" class="tab-pane fade"><br>
+										<h3>Menu 2</h3>
+										<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Movie Details last Container - Book Ticket Aside Container -->
+				<div class="col-12 col-lg-3 movie-details-last-container">
+					<!-- Container -->
+					<div>
+						<div>
+							<a style="text-decoration: none;" href="{% url 'prebooking' %}"><button type="button" class="btn btn-primary btn-block font-weight-light">BOOK TICKETS</button></a>
+						</div><br>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<!-- You Might Also Like Section -->
+	<section class="bg-light p-2">
+		<div class="p-5">		<!-- Main Container -->
+			<h4 class="text-center text-uppercase font-weight-normal">you might also like</h4>
+			<hr class="w-25 bg-danger">
+
+			<!-- Carousel -->
+			<div id="also-like-carousel" class="carousel slide p-3" data-ride="carousel" data-interval="false">
+
+				<!-- The slideshow -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">		<!-- First Slide -->
+						<!-- First Flex Box -->
+						<div class="d-flex justify-content-around">
+						{%for i in movies%}
+							<div>
+								<div>
+									<img id="youmightlike" style="height: 225px; width: 170px;" src="{{i.image.url}}" alt="{{i.name}}">
+								</div>
+								<div class="movie-description-container position-relative bg-white text-dark p-1 pl-2">
+									<div class="font-weight-bold">{{i.name}}</div>
+									<small class="text-secondary">{{i.language}} • {{i.release_date}} • {{i.category}}</small>
+									<div class="movie-like-container pr-2">
+										<span><i class="fas fa-heart text-danger"></i> {{i.rating}}</span>
+									</div>
+								</div>
+							</div>
+						{%endfor%}
+						</div>
+					</div>
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="carousel-control-prev" href="#also-like-carousel" data-slide="prev">
+					<span class="lead text-muted"><i class="fas fa-chevron-left"></i></span>
+				</a>
+				<a class="carousel-control-next" href="#also-like-carousel" data-slide="next">
+					<span class="lead text-muted"><i class="fas fa-chevron-right"></i></span>
+				</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

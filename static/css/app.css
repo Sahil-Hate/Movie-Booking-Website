@@ -1,0 +1,75 @@
+* {
+	box-sizing: border-box;
+}
+
+
+
+/*--------------------Main Header--------------------*/
+/* Carousel Container */
+#carousel-header img {
+	/* Make the image fully responsive */
+	width: 100%;
+	height: 300px;
+}
+
+
+
+/*--------------------Main Section--------------------*/
+#main-section {
+	background-color: #efefef;
+}
+
+/* Language / Genre / Format Selection Container */
+.lang-gen-fmt-container {
+	background-color: #f1f2f6;
+	margin-bottom: 15px;
+	height: auto;
+	border-radius: 4px;
+	padding: 15px;
+}
+/* Movies Selection Thumbnail Container */
+.movie-img-container {
+	margin-bottom: 30px;
+}
+	.movie-img-container img {
+		width: 100%;
+		height: 320px;
+	}
+	.movie-like-container {
+		position: absolute;
+		bottom: 30px;
+		right: 3px;
+		font-size: 13px;
+	}
+
+
+
+/*--------------------Media Queries--------------------*/
+@media screen and (max-width: 768px) {
+
+	/* Language / Genre / Format Selection Container */
+	.lang-gen-fmt-container {
+		display: none;
+	}
+	.nav-item {
+		font-size: 4vw;
+	}
+		.nav-item a {
+			padding: 7px 12px;
+		}
+
+	/* Movies Selection Thumbnail Container */
+	.movie-description-container {
+		font-size: 4vw;
+	}
+		.movie-description-container .movie-like-container {
+			font-size: 3vw
+		}
+}
+
+@media screen and (min-width: 768px) {
+	/* Lang Selection Button Container */
+	.lang-selection-button-container {
+		display: none;
+	}
+}

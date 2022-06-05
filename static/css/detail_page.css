@@ -1,0 +1,64 @@
+* {
+	box-sizing: border-box;
+}
+
+
+/* Movie Banner Container */
+
+/*--------------------Full Details Of Movie Container--------------------*/
+.movie-details-container {
+	padding: 0 120px;
+	margin-top: -125px;
+}
+
+#youmightlike{
+	height: 306.67px;
+	width: 230px;
+}
+/* Movie Details Middle Container */
+
+	/* Movie Cast & Crew Carousel Container */
+	#cast-carousel img,
+	#crew-carousel img {
+		width: 110px;
+		height: 110px;
+	}
+	#summary-tab .carousel-control-prev,
+	#summary-tab .carousel-control-next {
+		width: 5%;
+	}
+
+/* Movie Details last Container - Book Ticket Aside Container */
+.movie-details-last-container {
+	margin-top: 95px;
+}
+
+
+
+/*--------------------You Might Also Like Section Container--------------------*/
+.movie-description-container .movie-like-container {
+	position: absolute;
+	bottom: 30px;
+	right: 3px;
+	font-size: 13px;
+}
+#also-like-carousel img {
+	width: 230px;
+	height: auto;
+}
+#also-like-carousel .carousel-control-prev,
+#also-like-carousel .carousel-control-next {
+	width: 2%;
+}
+
+
+
+/*--------------------Media Queries--------------------*/
+@media screen and (max-width: 576px) {
+
+	/* Full Details Of Movie Container */
+	.movie-details-container {
+		padding: 0 10px;
+	}
+
+}

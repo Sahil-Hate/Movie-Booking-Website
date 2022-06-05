@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>Movie Booking System</title>
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light ">
+			<a class="navbar-brand" href="#"><img id="logo" src="{% static 'img/bookmyshow.png' %}"></a>
+			<div>
+				<form class="form-inline my-2 my-lg-0">
+				  <input class="form-control mr-sm-2" type="search" placeholder="Search">
+				  <button type="button" class="btn btn-danger">Search</button>
+				</form>
+			</div>
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			City
+			</a>
+			
+			{% if user.is_authenticated %}
+				<img class="user" id="user-pic" src="{% static 'img/user-pic.png' %}">
+				<span class="user" id="user-name">Hi, {{user.username}}</span>
+				<button onclick="location.href='{% url 'logout' %}'" type="button" class="btn btn-danger" id="logout-button">LogOut</button>
+
+			{% else %}
+				<button class="open-button" id="slbtn" onclick="location.href='{% url 'login' %}'">Sign In/Login</button>
+		    	<button onclick="location.href='{% url 'signup' %}'" class="open-button" id="subtn">Sign Up</button>
+			{% endif %}
+		</nav>	
+		<div class="topnav" >
+			<a class="active" href="#home">Home</a>
+			<a href={%url 'page' %}>Movies</a>
+			<a href="#contact">Events</a>
+			<a href="#about">Plays</a>
+			
+
+		</div>
+		<br>
+		<br>
+		<a href="https://youtu.be/COvnHv42T-A"><img id="movie-poster" src="{% static 'img/movie-poster.jpg' %}"></a>
+		<div class="main-movie">
+			<img src="{% static 'img/ddlj.jpg' %}" alt=""  /> 
+			<img src="{% static 'img/moonlight.jpg' %}" alt=""  />
+			<img src="{% static 'img/aladdin.jpg' %}" alt="" />
+			<img src="{% static 'img/vijay-master.jpg' %}" alt="" />
+			<img src="{% static 'img/Wonder_Woman_1984.png' %}" alt="" />
+			<a href="#">DDLJ</a>
+			&emsp;
+			&ensp;
+			<a href="#">Moonlight</a>
+			<a href="#">Aladdin</a>
+			&ensp;
+			<a id="vtm" href="#">Vijay The Master</a>
+			<a id="ww1984" href="#">Wonder Woman</a>
+		</div>
+		<hr>
+		
+			
+
+		<iframe width="60%" height="450" src="https://www.youtube.com/embed/GAr61hdF59Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<br>
+		<footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Bigtree Entertainment's BookMyShow is India's largest entertainment ticketing website. Headquartered in Mumbai, it is the only destination for movie and non-movie options like events, plays and sports.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href={%url 'page' %}>Movies</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Plays</a></li>
+              
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
+         <a href="#">SNF</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+		<script>
+			function openForm() {
+			  document.getElementById("myForm").style.display = "block";
+			}
+			function closeForm() {
+			  document.getElementById("myForm").style.display = "none";
+			}
+			function openForm1() {
+			  document.getElementById('id01').style.display='block'
+			}
+			function closeForm1() {
+			  document.getElementById('id01').style.display='none'
+			}
+			var modal = document.getElementById('id01');
+			window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			  }
+			}
+		</script>
+	</body>
+</html>	
